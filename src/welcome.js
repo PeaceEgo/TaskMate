@@ -51,7 +51,7 @@ function WelcomePage() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <img src={welcomeImage} alt="Welcome" className="mb-6 w-full h-full max-h-60 sm:max-h-[75vh] rounded-lg object-cover" />
       <h1 className="text-lg sm:text-2xl">Welcome to TaskMate</h1>
-      <p className="text-sm sm:text-base">A workspace for over 10 million influencers around the world.</p>
+      <p className="text-sm sm:text-base">Your personal task manager designed to keep you  <br></br> organized and productive. Easily create, track, and complete  <br></br>your daily tasks with just a few clicks. Stay on top of <br></br> your schedule with reminders, progress tracking, and  <br></br>task categories—all in one place.A workspace for over 10 million  <br></br> influencers around the world.</p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4">
         {/* Conditionally render the file input only if no profile picture is selected */}

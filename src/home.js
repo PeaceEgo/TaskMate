@@ -47,7 +47,7 @@ function Home() {
   };
 
   const handleDeleteTask = (index) => {
-    const updatedTasks = tasks.filter((_, i) => i !== index); // Remove the task at the given index
+    const updatedTasks = tasks.filter((_, i) => i !== index); 
     setTasks(updatedTasks);
   };
 
@@ -133,7 +133,7 @@ function Home() {
           onChange={toggleNotifications} 
         />
       </div>
-
+<div><img src={reminder} alt="reminder" className="mb-6 w-full h-full max-h-60 sm:max-h-[75vh] rounded-lg object-cover" /></div>
       <div className="max-h-60 overflow-y-auto mb-16"> {/* Ensure scrollability of tasks list */}
         {tasks.length === 0 ? (
           <p className={`text-center ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>No tasks for today. Create one!</p>
