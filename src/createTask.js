@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTasks } from './Context/taskContext';
 import Button from './button';
 
-// Utility function to generate a unique ID for each task
+// Utility function to generate a unique ID for each task and subtask
 const generateUniqueId = () => {
   return Date.now() + Math.floor(Math.random() * 1000);
 };
@@ -26,6 +26,8 @@ function CreateTask() {
   const [taskDate, setTaskDate] = useState('');
   const [reminderTime, setReminderTime] = useState('');
   const [error, setError] = useState('');
+  const [subtasks, setSubtasks] = useState([]); // List of subtasks
+  const [subtaskTitle, setSubtaskTitle] = useState(''); // Title of the current subtask being added
 
   const handleCreateTask = () => {
     if (!taskTitle || !taskTime || !taskDate) {
@@ -50,6 +52,7 @@ function CreateTask() {
       deadline: taskDeadline,
       reminderTime: reminderTimeInMs,
       isCompleted: false,
+      subtasks: subtasks.map(subtask => ({ ...subtask, isCompleted: false })), // Add subtasks with initial completion state
     };
 
     setTasks(prevTasks => [...prevTasks, newTask]);
@@ -60,12 +63,33 @@ function CreateTask() {
     setTaskTime('');
     setTaskDate('');
     setReminderTime('');
+    setSubtasks([]);
     setError('');
 
     // Log current time when task is created
     console.log('Task created at:', getCurrentTime());
 
     navigate('/home');
+  };
+
+  // Add a subtask to the list
+  const handleAddSubtask = () => {
+    if (!subtaskTitle.trim()) {
+      return;
+    }
+
+    const newSubtask = {
+      id: generateUniqueId(),
+      title: subtaskTitle,
+    };
+
+    setSubtasks([...subtasks, newSubtask]);
+    setSubtaskTitle(''); // Clear subtask input after adding
+  };
+
+  // Remove a subtask from the list
+  const handleRemoveSubtask = (id) => {
+    setSubtasks(subtasks.filter(subtask => subtask.id !== id));
   };
 
   return (
@@ -127,6 +151,40 @@ function CreateTask() {
             onChange={(e) => setReminderTime(e.target.value)}
             className="w-full bg-gray-800 text-white rounded-lg p-2"
           />
+        </li>
+
+        {/* Subtask Input and List */}
+        <li>
+          <div className="mb-4">
+            <input
+              type="text"
+              placeholder="Add a subtask"
+              value={subtaskTitle}
+              onChange={(e) => setSubtaskTitle(e.target.value)}
+              className="w-full bg-gray-800 text-white rounded-lg p-2"
+            />
+            <Button 
+              onClick={handleAddSubtask} 
+              label="Add Subtask" 
+              className="mt-2 w-full bg-pink-400 text-white py-2 rounded-lg"
+            />
+          </div>
+          {subtasks.length > 0 && (
+            <div className="space-y-2">
+              <h3 className="text-lg">Subtasks:</h3>
+              {subtasks.map(subtask => (
+                <div key={subtask.id} className="flex justify-between items-center bg-gray-800 p-2 rounded-lg">
+                  <span>{subtask.title}</span>
+                  <button
+                    onClick={() => handleRemoveSubtask(subtask.id)}
+                    className="text-red-500 hover:text-red-600"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </li>
 
         <li>

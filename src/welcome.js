@@ -50,7 +50,7 @@ function WelcomePage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <img src={welcomeImage} alt="Welcome" className="mb-6 w-full h-full max-h-60 sm:max-h-[75vh] rounded-lg object-cover" />
-      <h1 className="text-lg sm:text-2xl">Welcome to TaskMate</h1>
+      <h1 className="text-lg sm:text-2xl font-bold">Welcome to TaskMate</h1>
       <p className="text-sm sm:text-base text-center mb-5">Your personal task manager designed to keep you  organized and productive. Easily create, track, and  <br></br> complete  your daily tasks with just a few clicks. Stay  <br></br>on top of  your schedule with reminders, progress <br></br>tracking, and  task categories—all in one place.</p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4">
@@ -59,7 +59,7 @@ function WelcomePage() {
           <div>
             <label 
               htmlFor="profilePicture" 
-              className="cursor-pointer bg-pink-200 text-black p-2.5 rounded-lg w-50 pr-10">
+              className="cursor-pointer bg-pink-400 text-black p-2.5 rounded-lg w-50 pr-10">
               Choose Profile Picture
             </label>
             <input 
@@ -105,7 +105,7 @@ function WelcomePage() {
           required 
         />
 
-        <Button type="submit" label="Create Account" className="bg-pink-200 text-white mt-4" />
+        <Button type="submit" label="Create Account" className="bg-pink-400 text-white mt-4" />
       </form>
     </div>
   );
